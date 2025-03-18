@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+	  
+	  <AssemblyName>GetStartedApp</AssemblyName>
+	  
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\5.jpg" />
+		<AvaloniaResource Include="Assets\6.jpg" />
+		<AvaloniaResource Include="Assets\8.jpg" />
+	</ItemGroup>
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\2.jpg" />
+		<AvaloniaResource Include="Assets\4.jpg" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Assets\01.png" />
+		<EmbeddedResource Include="Assets\12.png" />
+		<EmbeddedResource Include="Assets\10.png" />
+		<EmbeddedResource Include="Assets\13.png" />
+	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.2.4" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.2.4" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.4" />
+	  <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.4" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.2.4">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Mapsui.Avalonia" Version="4.1.8" />
+    <PackageReference Include="MessageBox.Avalonia" Version="3.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+    <PackageReference Include="Prism.Avalonia" Version="8.1.97.11073" />
+    <PackageReference Include="Prism.DryIoc.Avalonia" Version="8.1.97.11073" />
+    <PackageReference Include="Prism.Forms" Version="8.1.97" />
+    <PackageReference Include="Prism.Unity.Avalonia" Version="7.2.0.1430" />
+
+
+
+	 
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\LayUI-Avalonia-main\src\LayuiAvaloniaPack\Layui.Core\Layui.Core.csproj" />
+    <ProjectReference Include="..\LayUI-Avalonia-main\src\LayuiAvaloniaPack\UI\LayUI.Avalonia\LayUI.Avalonia.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Message.axaml.cs">
+      <DependentUpon>Message.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TextBoxPage.axaml.cs">
+      <DependentUpon>TextBoxPage.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\AddVisitorDialog.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\EditVisitorDialog.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\OrderTipDialog.axaml" />
+  </ItemGroup>
+</Project>

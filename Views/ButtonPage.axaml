@@ -1,0 +1,207 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:global="using:LayUI.Avalonia.Global"
+             xmlns:lay="using:LayUI.Avalonia.Controls"
+             x:Class="GetStartedApp.Views.ButtonPage"
+>
+	<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+		<Grid Margin="10">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="5"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Border Grid.Row="0"
+                    Background="White"
+                    BorderBrush="LightGray"
+                    BorderThickness="1"
+                    CornerRadius="5"
+                    Padding="10"
+                    Margin="0,0,0,0">
+				<StackPanel>
+					<Grid Width="600" Height="300"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Top"
+                          Margin="0,0,0,10">
+						<Image Source="{Binding CurrentImage}"
+                               Stretch="Uniform"
+                               Width="600" Height="300"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top"/>
+						<StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Margin="0,0,0,10">
+							<ItemsControl ItemsSource="{Binding ImageIndicators}">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<StackPanel Orientation="Horizontal"/>
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<Ellipse Width="10" Height="10"
+                                                 Fill="{Binding Color}"
+                                                 Margin="5,0"
+                                                 Cursor="Hand"
+                                                 PointerPressed="Ellipse_PointerPressed"/>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</StackPanel>
+					</Grid>
+					<TextBlock Text="禅达景区"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               Margin="0,20,0,0"/>
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0">
+						<lay:LayDialogHost global:LayDialog.Token="DialogPageRoot">
+							<Grid>
+								<StackPanel Margin="2" Orientation="Horizontal" VerticalAlignment="Center">
+									<Button Content="景区介绍>"
+                                            FontSize="12"
+                                            Command="{Binding DlalogCommand}"
+                                            CommandParameter="RootDialog"
+                                            FontWeight="Bold"
+                                            CornerRadius="15"
+                                            Background="#FFF3E0"
+                                            Foreground="Orange"
+                                            Margin="0,0,20,0"/>
+									<Button Content="游客须知>"
+                                            FontSize="12"
+                                            Command="{Binding DialogCommand}"
+                                            CommandParameter="RootDialog"
+                                            CornerRadius="15"
+                                            Background="#FFF3E0"
+                                            Foreground="Orange"
+                                            Margin="0,0,20,0"/>
+								</StackPanel>
+							</Grid>
+						</lay:LayDialogHost>
+					</StackPanel>
+					<Rectangle Height="1" Fill="LightGray" Margin="0,10,0,10"/>
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0">
+						<Image Source="avares://GetStartedApp/Assets/location_icon.png"
+                               Width="20" Height="20"
+                               Margin="0,0,5,0"
+                               Cursor="Hand"
+                               PointerPressed="LocationIcon_PointerPressed"/>
+						<TextBlock Text="云南省腾冲县江苴村 >"
+                                   FontSize="14"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"/>
+					</StackPanel>
+				</StackPanel>
+			</Border>
+			<Rectangle Grid.Row="1" Fill="#FFE0E0E0"/>
+			<StackPanel Grid.Row="2" Spacing="0">
+				<TextBlock Text="门票"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Margin="0,20,0,10"
+                           HorizontalAlignment="Left"/>
+				<ItemsControl ItemsSource="{Binding Exhibition}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,0,10">
+								<Grid>
+									<Rectangle Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="0,10,0,10"/>
+									<Rectangle Width="1" Fill="LightGray" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,10,0,10"/>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto"/>
+										<RowDefinition Height="Auto"/>
+									</Grid.RowDefinitions>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+									</Grid.ColumnDefinitions>
+									<TextBlock Text="{Binding name}"
+                                               FontSize="18"
+                                               Margin="0,0,0,5"
+                                               Grid.Row="0"
+                                               Grid.Column="0"
+                                               HorizontalAlignment="Left"/>
+									<Image Source="{Binding DisplayImage}"
+									   Width="100"
+									   Height="100"
+									   Stretch="Uniform"
+									   Margin="0,0,10,0"
+									   Grid.Row="1"
+									   Grid.Column="0"
+									   VerticalAlignment="Center"/>
+									<ScrollViewer VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled"
+                                          Margin="10,10,0,0"
+                                          Grid.Row="1"
+                                          Grid.Column="1"
+                                          MaxHeight="150">
+										<StackPanel>
+											<TextBlock Text="购票须知："
+													   FontSize="12"
+													   FontWeight="Bold"
+													   Foreground="Orange"/>
+											<TextBlock Text="1. 请提前一天预订，门票一经售出概不退换。"
+													   FontSize="12"
+													   Foreground="Orange"
+													   Margin="0,5,0,0"/>
+											<TextBlock Text="2. 门票仅限当日使用，过期无效。"
+													   FontSize="12"
+													   Foreground="Orange"
+													   Margin="0,5,0,0"/>
+											<TextBlock Text="3. 请妥善保管门票，遗失不补。"
+													   FontSize="12"
+													   Foreground="Orange"
+													   Margin="0,5,0,0"/>
+										</StackPanel>
+									</ScrollViewer>
+
+									<TextBlock Text="{Binding basicPrice, StringFormat='¥{0:0.00}'}"
+                                               Grid.Column="2"
+                                               Margin="0,0,10,0"
+                                               VerticalAlignment="Center"
+                                               Foreground="Orange"/>
+									<Button Grid.Column="3"
+										 Content="预订"
+									IsEnabled="True"
+									MinWidth="80"
+									Height="30"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center"
+									Background="#FFA500"
+									Foreground="White"
+									Margin="10,0,0,0"
+									CornerRadius="15"
+									FontWeight="Bold"
+									HorizontalContentAlignment="Center"
+									VerticalContentAlignment="Center"
+									Command="{Binding DataContext.BookCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+									CommandParameter="{Binding id}"> 
+						<Button.Styles>
+							<Style Selector="Button:disabled">
+								<Setter Property="Background" Value="LightGray"/>
+								<Setter Property="Foreground" Value="White"/>
+								<Setter Property="Cursor" Value="Arrow"/>
+							</Style>
+        <Style Selector="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Button.Styles>
+</Button>
+								</Grid>
+							</Border>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
+		</Grid>
+	</ScrollViewer>
+</UserControl>

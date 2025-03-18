@@ -1,0 +1,121 @@
+<UserControl
+    x:Class="GetStartedApp.Views.VisitorNoticePage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lay="using:LayUI.Avalonia.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+	<Border
+        Margin="10"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        BoxShadow="0 0 50 0 #3000"
+        CornerRadius="2">
+		<Grid MinWidth="300">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="10" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Border Grid.Row="0" Background="White" Padding="20">
+				<Grid>
+					<TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="24"
+                        Foreground="Black"
+                        Text="游客须知" />
+					<lay:LayButton
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Width="30"
+                        Height="30"
+                        Command="{Binding CloseCommand}"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Foreground="Black"
+                        Content="X"
+                        FontSize="20"
+                        Padding="0"
+                        Margin="0">
+						<lay:LayButton.Styles>
+							<Style Selector="lay|LayButton:pointerover /template/ ContentPresenter">
+								<Setter Property="Foreground" Value="Red" />
+							</Style>
+							<Style Selector="lay|LayButton:pressed /template/ ContentPresenter">
+								<Setter Property="Foreground" Value="Red" />
+							</Style>
+						</lay:LayButton.Styles>
+					</lay:LayButton>
+				</Grid>
+			</Border>
+			<Border Grid.Row="1" Background="#F0F0F0" />
+			<Border Grid.Row="2" Background="#F0F0F0" Padding="20,10">
+				<TextBlock
+                    FontSize="18"
+                    Foreground="#FF9800"
+                    Text="|游客须知" />
+			</Border>
+			<ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+				<Border Background="White" Padding="20,10">
+					<StackPanel>
+						<TextBlock
+                            Foreground="Black"
+                            TextWrapping="Wrap"
+                            Text="1. 请遵守景区规定，爱护环境，不随意丢弃垃圾。" />
+						<TextBlock
+                            Margin="0,10,0,0"
+                            Foreground="Black"
+                            TextWrapping="Wrap"
+                            Text="2. 景区内禁止吸烟，禁止携带易燃易爆物品。" />
+						<TextBlock
+                            Margin="0,10,0,0"
+                            Foreground="Black"
+                            TextWrapping="Wrap"
+                            Text="3. 请勿攀爬危险区域，注意自身安全。" />
+						<TextBlock
+                            Margin="0,10,0,0"
+                            Foreground="Black"
+                            TextWrapping="Wrap"
+                            Text="4. 景区开放时间：08:00 - 18:00，请合理安排游览时间。" />
+						<TextBlock
+                            Margin="0,10,0,0"
+                            Foreground="Black"
+                            TextWrapping="Wrap"
+                            Text="5. 如需帮助，请联系景区工作人员。" />
+						<TextBlock
+                            Margin="0,20,0,0"
+                            Foreground="Black"
+                            TextWrapping="Wrap"
+                            Text="1. Please follow the scenic area regulations, protect the environment, and do not litter." />
+						<TextBlock
+                            Margin="0,10,0,0"
+                            Foreground="Black"
+                            TextWrapping="Wrap"
+                            Text="2. Smoking and carrying flammable or explosive items are prohibited in the scenic area." />
+						<TextBlock
+                            Margin="0,10,0,0"
+                            Foreground="Black"
+                            TextWrapping="Wrap"
+                            Text="3. Do not climb dangerous areas and pay attention to your safety." />
+						<TextBlock
+                            Margin="0,10,0,0"
+                            Foreground="Black"
+                            TextWrapping="Wrap"
+                            Text="4. The scenic area is open from 08:00 to 18:00. Please plan your visit accordingly." />
+						<TextBlock
+                            Margin="0,10,0,0"
+                            Foreground="Black"
+                            TextWrapping="Wrap"
+                            Text="5. If you need assistance, please contact the scenic area staff." />
+					</StackPanel>
+				</Border>
+			</ScrollViewer>
+		</Grid>
+	</Border>
+</UserControl>

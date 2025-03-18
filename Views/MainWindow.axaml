@@ -1,0 +1,40 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GetStartedApp.ViewModels"
+        xmlns:converter="clr-namespace:GetStartedApp.MyConverter;assembly=GetStartedApp"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ais="using:AvaloniaInfiniteScrolling"
+        xmlns:con="using:GetStartedApp.Controls"
+		xmlns:lay="using:LayUI.Avalonia.Controls"
+		xmlns:global="using:LayUI.Avalonia.Global"
+        mc:Ignorable="d"
+        d:DesignWidth="550"
+        d:DesignHeight="740"
+        x:Class="GetStartedApp.Views.MainWindow"
+        xmlns:prism="http://prismlibrary.com/"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="GetStartedApp"
+        Width="550" Height="740">
+	<Window.Styles>
+		<Style Selector="TextBlock.h1">
+			<Setter Property="FontSize" Value="24"/>
+			<Setter Property="FontWeight" Value="Bold"/>		
+		</Style>
+		<Style Selector="Button:pressed">
+			<Setter Property="Background" Value="White" />
+		</Style>
+	</Window.Styles>
+	<Window.Resources>
+		<converter:ButtonParConverter x:Key="MyConverter"/>
+	</Window.Resources>
+	<lay:LayMessageHost Grid.Row="1" global:LayMessage.Token="RootMessage">
+		<lay:LayNotificationHost global:LayNotification.Token="RootNotification">
+			<lay:LayDialogHost global:LayDialog.Token="RootDialog">
+				<ContentControl prism:RegionManager.RegionName="Nav_MainContent" />
+			</lay:LayDialogHost>
+		</lay:LayNotificationHost>
+	</lay:LayMessageHost>
+
+
+</Window>

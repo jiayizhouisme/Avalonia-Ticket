@@ -1,0 +1,42 @@
+﻿<Styles
+	xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GetStartedApp.Controls">
+	
+	<Style Selector="local|TestControl">
+		<Setter Property="Type">
+			<Setter.Value>
+				9
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<Grid Margin="10,10">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition />
+							<ColumnDefinition Width="auto" />
+						</Grid.ColumnDefinitions>
+						<Grid Grid.Column="0">
+							<Ellipse Fill="LightBlue"/>
+							<ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
+												Margin="{TemplateBinding Padding}"
+												HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+												VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+												Content="{TemplateBinding MyContent}"/>
+						</Grid>
+						<TextBox Grid.Column="1" Text="{TemplateBinding MyContent}"></TextBox>
+					</Grid>
+					
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style Selector="^:pointerover">
+			<Setter Property="RenderTransform">
+				<ScaleTransform ScaleX="0.8" ScaleY="0.8" />
+			</Setter>
+		</Style>
+	</Style>
+	
+</Styles>

@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="GetStartedApp.LoginPage"
+		 xmlns:prism="http://prismlibrary.com/"
+		Background="LightGray">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Border Grid.Row="0" Background="White" Padding="20" CornerRadius="15" Margin="20">
+			<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
+				<TextBlock Text="欢迎登录" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+					<TextBlock Text="用户名:" Margin="0,0,10,0" VerticalAlignment="Center"/>
+					<Border BorderBrush="Gray" BorderThickness="0" CornerRadius="10" Padding="5">
+						<TextBox Name="UsernameTextBox" Width="200" Text="{Binding Username}" HorizontalAlignment="Stretch"/>
+					</Border>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+					<TextBlock Text="密 码:" Margin="0,0,20,0" VerticalAlignment="Center"/>
+					<Border BorderBrush="Gray" BorderThickness="0" CornerRadius="10" Padding="5">
+						<TextBox Name="PasswordBox" Width="200" Text="{Binding Password}" PasswordChar="*" HorizontalAlignment="Stretch"/>
+					</Border>
+				</StackPanel>
+				<CheckBox Name="RememberMeCheckBox" Content="记住我" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+					<Button Name="LoginButton" Content="登录" Margin="0,0,40,0" Command="{Binding LoginCommand}" Background="CornflowerBlue" Foreground="White" CornerRadius="10" Padding="10"/>
+					<Button Name="RegisterButton" Content="注册" Margin="0,0,40,0" Command="{Binding NavigateToRegisterCommand}" Background="CornflowerBlue" Foreground="White" CornerRadius="10" Padding="10"/>
+					<Button Name="ForgotPasswordButton" Content="忘记密码" Background="CornflowerBlue" Foreground="White" CornerRadius="10" Padding="10"/>
+				</StackPanel>			
+			</StackPanel>
+		</Border>
+		<ContentControl x:Name="Nav_LoginContent" prism:RegionManager.RegionName="Nav_LoginContent" DockPanel.Dock="Right" Grid.Column="1" />
+	</Grid>
+</UserControl>

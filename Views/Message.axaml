@@ -1,0 +1,83 @@
+<UserControl
+    x:Class="GetStartedApp.Views.Message"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lay="clr-namespace:LayUI.Avalonia.Controls;assembly=LayUI.Avalonia"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+	<Border
+        Margin="10"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        BoxShadow="0 0 50 0 #3000"
+        CornerRadius="2">
+		<Grid MinWidth="300">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="10" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Border Grid.Row="0" Background="White" Padding="20">
+				<Grid>
+					<TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="24"
+                        Foreground="Black"
+                        Text="景区介绍" />
+					<lay:LayButton
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Width="30"
+                        Height="30"
+                        Command="{Binding CloseCommand}"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Foreground="Black"
+                        Content="X"
+                        FontSize="20"
+                        Padding="0"
+                        Margin="0">
+						<lay:LayButton.Styles>
+							<Style Selector="lay|LayButton:pointerover /template/ ContentPresenter">
+								<Setter Property="Foreground" Value="Red" />
+							</Style>
+							<Style Selector="lay|LayButton:pressed /template/ ContentPresenter">
+								<Setter Property="Foreground" Value="Red" />
+							</Style>
+						</lay:LayButton.Styles>
+					</lay:LayButton>
+				</Grid>
+			</Border>
+			<Border Grid.Row="1" Background="#F0F0F0" />
+			<Border Grid.Row="2" Background="#F0F0F0" Padding="20,10">
+				<TextBlock
+                    FontSize="18"
+                    Foreground="#FF9800"
+                    Text="|景区详情" />
+			</Border>
+			<ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+				<Border Background="White" Padding="20,10">
+					<StackPanel>
+						<TextBlock
+                            Foreground="Black"
+                            TextWrapping="Wrap">
+							禅达景区位于云南省腾冲县江苴村，是一个集自然风光、人文景观和宗教文化于一体的综合性旅游景区。景区内有丰富的植被和独特的地貌，吸引了大量游客前来观光。禅达景区以其宁静的环境和深厚的文化底蕴，成为了一个理想的休闲度假胜地。
+						</TextBlock>
+						<TextBlock
+                            Margin="0,20,0,0"
+                            Foreground="Black"
+                            TextWrapping="Wrap">
+							Chanda Scenic Area is located in Jiangzuo Village, Tengchong County, Yunnan Province. It is a comprehensive tourist attraction that integrates natural scenery, cultural landscapes, and religious culture. The area boasts rich vegetation and unique landforms, attracting a large number of tourists. With its tranquil environment and profound cultural heritage, Chanda Scenic Area has become an ideal destination for leisure and vacation.
+						</TextBlock>
+					</StackPanel>
+				</Border>
+			</ScrollViewer>
+		</Grid>
+	</Border>
+</UserControl>

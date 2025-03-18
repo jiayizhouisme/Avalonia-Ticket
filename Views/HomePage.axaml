@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GetStartedApp.Views.HomePage"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<ContentControl x:Name="Nav_HomeContent" prism:RegionManager.RegionName="Nav_HomeContent" Grid.Row="0" />
+		<Border Grid.Row="1" Background="White" Height="80" HorizontalAlignment="Stretch">
+			<Grid HorizontalAlignment="Stretch">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Button Grid.Column="0" Background="Transparent" BorderThickness="0" Command="{Binding GoPageCommand}" CommandParameter="{Binding Menus[0]}" Margin="80,0,0,0">
+					<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+						<Image Source="{Binding ImageFromBinding}" Width="30" Height="30" Margin="0,0,0,5" VerticalAlignment="Center" />
+						<TextBlock Text="{Binding Menus[0].Title}" FontSize="16" Foreground="{Binding Menus[0].TextColor}" VerticalAlignment="Center" />
+					</StackPanel>
+				</Button>
+				<Button Grid.Column="2" Background="Transparent" BorderThickness="0" Command="{Binding GoPageCommand}" CommandParameter="{Binding Menus[1]}" Margin="0,0,80,0">
+					<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+						<Image Source="{Binding ImageFromBinding2}" Width="30" Height="30" Margin="0,0,0,5" VerticalAlignment="Center" />
+						<TextBlock Text="{Binding Menus[1].Title}" FontSize="16" Foreground="{Binding Menus[1].TextColor}" VerticalAlignment="Center" />
+					</StackPanel>
+				</Button>
+			</Grid>
+		</Border>
+	</Grid>
+</UserControl>
