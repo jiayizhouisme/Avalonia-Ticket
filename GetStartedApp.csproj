@@ -60,11 +60,6 @@
 
 	 
   </ItemGroup>
-	
-  <ItemGroup>
-    <ProjectReference Include="..\LayUI-Avalonia-main\src\LayuiAvaloniaPack\Layui.Core\Layui.Core.csproj" />
-    <ProjectReference Include="..\LayUI-Avalonia-main\src\LayuiAvaloniaPack\UI\LayUI.Avalonia\LayUI.Avalonia.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Views\Message.axaml.cs">
@@ -85,5 +80,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\OrderTipDialog.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\项目\LayUI-Avalonia-main\src\LayuiAvaloniaPack\Layui.Core\Layui.Core.csproj" />
+    <ProjectReference Include="..\项目\LayUI-Avalonia-main\src\LayuiAvaloniaPack\UI\LayUI.Avalonia\LayUI.Avalonia.csproj" />
   </ItemGroup>
 </Project>

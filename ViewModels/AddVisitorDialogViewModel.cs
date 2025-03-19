@@ -67,7 +67,7 @@ namespace GetStartedApp.ViewModels
 
         private void CloseDialog()
         {
-            RequestClose?.Invoke(new LayDialogResult(LayUI.Avalonia.Enums.ButtonResult.Cancel));
+            RequestClose?.Invoke(new LayDialogResult(LayUI.Avalonia.Enums.ButtonResult.No));
             _regionManager.Regions["DialogRegion"].RemoveAll();
         }
 
@@ -103,7 +103,7 @@ namespace GetStartedApp.ViewModels
                 _onVisitorAddedCallback?.Invoke(newVisitor);
                  var par=new LayDialogParameter();
                 par.Add("Visitor",newVisitor);
-                RequestClose?.Invoke(new LayDialogResult(LayUI.Avalonia.Enums.ButtonResult.OK,par));
+                RequestClose?.Invoke(new LayDialogResult(LayUI.Avalonia.Enums.ButtonResult.Yes,par));
                 _regionManager.Regions["DialogRegion"].RemoveAll();
             }
             catch (Exception ex)
