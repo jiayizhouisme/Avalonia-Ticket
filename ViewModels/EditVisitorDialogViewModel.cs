@@ -45,31 +45,13 @@ namespace GetStartedApp.ViewModels
 
         private void CloseDialog()
         {
-            RequestClose?.Invoke(new LayDialogResult(LayUI.Avalonia.Enums.ButtonResult.Cancel));
+            RequestClose?.Invoke(new LayDialogResult(LayUI.Avalonia.Enums.ButtonResult.No));
             _regionManager.Regions["DialogRegion"].RemoveAll();
         }
 
         public void OnOpened(ILayDialogParameter parameters)
         {
-            if (parameters.TryGetValue("Visitor", out object visitorObj) && visitorObj is UserInfos visitor)
-            {
-                Visitor = visitor;
-                System.Diagnostics.Debug.WriteLine($"Received visitor: {visitor.Name}");
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Failed to receive visitor object.");
-                Visitor = new UserInfos();
-            }
-            if (parameters.TryGetValue("OnVisitorUpdated", out object callbackObj) && callbackObj is Action<UserInfos> callback)
-            {
-                _onVisitorUpdatedCallback = callback;
-                System.Diagnostics.Debug.WriteLine("Received OnVisitorUpdated callback.");
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Failed to receive OnVisitorUpdated callback.");
-            }
+
         }
         private async void SaveVisitor()
         {
@@ -88,7 +70,7 @@ namespace GetStartedApp.ViewModels
                     _onVisitorUpdatedCallback?.Invoke(Visitor);
                     var par = new LayDialogParameter();
                     par.Add("Visitor", Visitor);
-                    RequestClose?.Invoke(new LayDialogResult(LayUI.Avalonia.Enums.ButtonResult.OK, par));
+                    RequestClose?.Invoke(new LayDialogResult(LayUI.Avalonia.Enums.ButtonResult.Yes, par));
                     _regionManager.Regions["DialogRegion"].RemoveAll();
                 }
                 else

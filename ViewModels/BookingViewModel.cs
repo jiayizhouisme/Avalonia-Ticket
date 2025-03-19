@@ -169,7 +169,7 @@ namespace GetStartedApp.ViewModels
 
             this._layDialogService.Show("EditVisitorDialog", parameters, res =>
             {
-                if (res.Result == LayUI.Avalonia.Enums.ButtonResult.OK)
+                if (res.Result == LayUI.Avalonia.Enums.ButtonResult.Yes)
                 {
                     var updatedVisitor = res.Parameters.GetValue<UserInfos>("Visitor");
                     if (updatedVisitor != null)
@@ -199,7 +199,7 @@ namespace GetStartedApp.ViewModels
             {
                 this._layDialogService.Show("AddVisitorDialog", null, res =>
                 {
-                    if (res.Result == LayUI.Avalonia.Enums.ButtonResult.OK)
+                    if (res.Result == LayUI.Avalonia.Enums.ButtonResult.Yes)
                     {
                         var addedVisitor = res.Parameters.GetValue<UserInfos>("Visitor");
                         if (addedVisitor != null)
