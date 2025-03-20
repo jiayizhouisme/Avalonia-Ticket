@@ -19,7 +19,9 @@ namespace GetStartedApp.ViewModels
       //  public string? StockName { get; set; }
         public int? amount { get; set; }
         public ICollection<Order> Order { get; set; } = new List<Order>();
-        public ICollection<Exhibition> Exhibitions { get; set; } = new List<Exhibition>();
+        // public ICollection<Exhibition> Exhibition { get; set; } = new List<Exhibition>();
+        public Guid? objectId { get; set; } 
+        public Exhibition Exhibition { get; set; } 
     }
 }
 

@@ -32,15 +32,18 @@ namespace GetStartedApp.ViewModels
                 v => (int)v,
                 v => (OrderStatus)v);
             base.OnModelCreating(modelBuilder);
-        
-        //modelBuilder.Entity<Order>()
-        //     .ToTable("Order")
+            modelBuilder.Entity<Appointment>()
+            .HasOne(a => a.Exhibition)
+            .WithMany(e => e.Appointment)
+            .HasForeignKey(a => a.objectId);
+            //modelBuilder.Entity<Order>()
+            //     .ToTable("Order")
 
-        //   .Property(o => o.Trade_No).HasColumnName("Trade_No");
-        //modelBuilder.Entity<Order>()
+            //   .Property(o => o.Trade_No).HasColumnName("Trade_No");
+            //modelBuilder.Entity<Order>()
 
-        //   .Property(o => o.AppointmentId).HasColumnName("AppointmentId");
-        modelBuilder.Entity<UserInfos>(entity =>
+            //   .Property(o => o.AppointmentId).HasColumnName("AppointmentId");
+            modelBuilder.Entity<UserInfos>(entity =>
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id)

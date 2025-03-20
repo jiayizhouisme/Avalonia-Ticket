@@ -37,7 +37,7 @@ namespace GetStartedApp.ViewModels
         public ICollection<Ticket> Tickets { get; set; }
         public virtual Appointment Appointment { get; set; }
 
-
+    
     }
 
 }

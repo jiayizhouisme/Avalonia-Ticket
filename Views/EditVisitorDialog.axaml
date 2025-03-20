@@ -86,7 +86,7 @@
                      Grid.Row="3"
                      Grid.Column="1"
                      Margin="10,20,0,20"
-                     Text="{Binding Visitor.Name}"
+                     Text="{Binding Visitor.Name, Mode=TwoWay}"
                      Width="300"/>
 			<TextBlock Text="身份证号:"
                        FontSize="14"
@@ -100,7 +100,7 @@
                      Grid.Row="4"
                      Grid.Column="1"
                      Margin="10,20,0,20"
-                     Text="{Binding Visitor.IdCard}"
+                     Text="{Binding Visitor.IdCard,Mode=TwoWay}"
                      Width="300"/>
 			<TextBlock Text="手机号:"
                        FontSize="14"
@@ -114,7 +114,7 @@
                      Grid.Row="5"
                      Grid.Column="1"
                      Margin="10,20,0,20"
-                     Text="{Binding Visitor.PhoneNumber}"
+                     Text="{Binding Visitor.PhoneNumber, Mode=TwoWay}"
                      Width="300"/>
 			<TextBlock Text="温馨提示:请您填写出行人真实准确的信息，如存在实名制要求的，还需要您在出游时出具相应证件用于身份验证。"
                        FontSize="12"

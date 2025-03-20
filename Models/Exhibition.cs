@@ -22,7 +22,6 @@ namespace GetStartedApp.ViewModels
 
         [Comment("景区提前预约天数")]
         public int? beforeDays { get; set; }
-
         public bool isDeleted { get; set; }
         [Comment("创建日期")]
         public DateTime CreateTime { get; set; }
@@ -35,7 +34,7 @@ namespace GetStartedApp.ViewModels
         public string forbiddenRule { get; set; }
         [NotMapped]
         public DateTime MaxBookingDate => DateTime.Today.AddDays((beforeDays ?? 7) - 1);
-        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public ICollection<Appointment> Appointment{ get; set; } = new List<Appointment>();
         [NotMapped]
         public string FullDescription => description;
         public string ImagePath => $"avares://GetStartedApp/Assets/{imgs}";

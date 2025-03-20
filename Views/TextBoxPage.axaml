@@ -67,7 +67,8 @@
                                 Foreground="Orange"
                                 Background="Transparent"
                                 BorderThickness="0"
-                                HorizontalAlignment="Right"/>
+                                HorizontalAlignment="Right"
+								 Click="OnAllButtonClick"/>
 					</Grid>
 					<Grid HorizontalAlignment="Stretch">
 						<Grid.ColumnDefinitions>

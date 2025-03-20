@@ -1,0 +1,86 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:global="clr-namespace:LayUI.Avalonia.Global">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <global:LayDialogWindow Width="500" Height="300" />
+        </Border>
+    </Design.PreviewWith>
+    <Style Selector="global|LayDialogWindow">
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="Cycle" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid Name="PART_Root">
+                        <Grid.Transitions>
+                            <Transitions>
+                                <DoubleTransition Property="Opacity" Duration="0:0:0.1" />
+                            </Transitions>
+                        </Grid.Transitions>
+                        <Grid
+                            Name="PART_Body"
+                            Background="Black"
+                            Opacity="0.3" />
+                        <ContentPresenter
+                            Name="PART_ContentPresenter"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            UseLayoutRounding="True" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style Selector="global|LayDialogWindow/template/ Grid#PART_Root">
+        <Setter Property="Opacity" Value="0" />
+    </Style>
+    <Style Selector="global|LayDialogWindow[IsOpen=true] /template/ Grid#PART_Root">
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="global|LayDialogWindow[IsOpen=false] /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Opacity" Value="0" />
+        <Setter Property="ScaleTransform.ScaleY" Value="0.7" />
+        <Setter Property="ScaleTransform.ScaleX" Value="0.7" />
+    </Style>
+    <Style Selector="global|LayDialogWindow[IsOpen=false] /template/ ContentPresenter#PART_ContentPresenter">
+        <Style.Animations>
+            <Animation
+                Easing="SineEaseInOut"
+                FillMode="Both"
+                Duration="0:0:0.1">
+                <KeyFrame Cue="0%">
+                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.7" />
+                    <Setter Property="ScaleTransform.ScaleX" Value="0.7" />
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="global|LayDialogWindow[IsOpen=true] /template/ ContentPresenter#PART_ContentPresenter">
+        <Style.Animations>
+            <Animation
+                Easing="SineEaseInOut"
+                FillMode="Both"
+                Duration="0:0:0.1">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0" />
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.7" />
+                    <Setter Property="ScaleTransform.ScaleX" Value="0.7" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+</Styles>

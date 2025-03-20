@@ -1,0 +1,743 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lay="clr-namespace:LayUI.Avalonia.Controls">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <lay:LayLoading
+                Width="200"
+                Height="200"
+                IsActive="True"
+                Type="Revolve">
+                <lay:LayButton />
+            </lay:LayLoading>
+        </Border>
+    </Design.PreviewWith>
+    <Style Selector="Ellipse.RingEllipseStyle">
+        <Setter Property="Opacity" Value="0" />
+    </Style>
+    <Style Selector="lay|LayLoading">
+        <Setter Property="Color" Value="{DynamicResource LightGreen}" />
+        <Setter Property="ClipToBounds" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border
+                        Name="PART_BorderBody"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        ClipToBounds="{TemplateBinding ClipToBounds}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <Grid Margin="{TemplateBinding BorderThickness}">
+                            <ContentPresenter
+                                Name="PART_ContentPresenter"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+                            <Grid IsVisible="{TemplateBinding IsActive}">
+                                <Grid Background="Black" Opacity="0.1" />
+                                <Grid
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    RowDefinitions="auto,*">
+                                    <TemplatedControl
+                                        Name="PART_LoadingContent"
+                                        Background="{TemplateBinding Color}"
+                                        Tag="{TemplateBinding Size}" />
+                                    <TextBlock
+                                        Grid.Row="1"
+                                        Margin="5"
+                                        Text="{TemplateBinding Title}"
+                                        TextAlignment="Center"
+                                        TextTrimming="WordEllipsis"
+                                        TextWrapping="Wrap" />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--  Window忙碌效果 Start  -->
+    <Style Selector="lay|LayLoading[Type=Window]">
+        <Setter Property="Size" Value="60" />
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]/template/ TemplatedControl#PART_LoadingContent">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Viewbox Width="{TemplateBinding Tag}" Height="{TemplateBinding Tag}">
+                        <Grid Width="250" Height="250">
+                            <Grid Name="PART_Ellipse1R">
+                                <Ellipse
+                                    Name="PART_Ellipse1"
+                                    Width="20"
+                                    Height="20"
+                                    VerticalAlignment="Bottom"
+                                    Classes="RingEllipseStyle"
+                                    Fill="{TemplateBinding Background}" />
+                            </Grid>
+                            <Grid Name="PART_Ellipse2R">
+                                <Ellipse
+                                    Name="PART_Ellipse2"
+                                    Width="20"
+                                    Height="20"
+                                    VerticalAlignment="Bottom"
+                                    Classes="RingEllipseStyle"
+                                    Fill="{TemplateBinding Background}" />
+                            </Grid>
+                            <Grid Name="PART_Ellipse3R">
+                                <Ellipse
+                                    Name="PART_Ellipse3"
+                                    Width="20"
+                                    Height="20"
+                                    VerticalAlignment="Bottom"
+                                    Classes="RingEllipseStyle"
+                                    Fill="{TemplateBinding Background}" />
+                            </Grid>
+                            <Grid Name="PART_Ellipse4R">
+                                <Ellipse
+                                    Name="PART_Ellipse4"
+                                    Width="20"
+                                    Height="20"
+                                    VerticalAlignment="Bottom"
+                                    Classes="RingEllipseStyle"
+                                    Fill="{TemplateBinding Background}" />
+                            </Grid>
+                            <Grid Name="PART_Ellipse5R">
+                                <Ellipse
+                                    Name="PART_Ellipse5"
+                                    Width="20"
+                                    Height="20"
+                                    VerticalAlignment="Bottom"
+                                    Classes="RingEllipseStyle"
+                                    Fill="{TemplateBinding Background}" />
+                            </Grid>
+                            <Grid Name="PART_Ellipse6R">
+                                <Ellipse
+                                    Name="PART_Ellipse6"
+                                    Width="20"
+                                    Height="20"
+                                    VerticalAlignment="Bottom"
+                                    Classes="RingEllipseStyle"
+                                    Fill="{TemplateBinding Background}" />
+                            </Grid>
+                        </Grid>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]lay|LayLoading[IsActive=true]  /template/ TemplatedControl#PART_LoadingContent /template/ Ellipse#PART_Ellipse1">
+        <Style.Animations>
+            <Animation
+                Delay="0"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:4.4">
+                <KeyFrame KeyTime="0:0:0.001">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.21">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.22">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.47">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]lay|LayLoading[IsActive=true]  /template/ TemplatedControl#PART_LoadingContent /template/ Ellipse#PART_Ellipse2">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.167"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:4.4">
+                <KeyFrame KeyTime="0:0:0.001">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.21">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.22">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.47">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]lay|LayLoading[IsActive=true]  /template/ TemplatedControl#PART_LoadingContent /template/ Ellipse#PART_Ellipse3">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.334"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:4.4">
+                <KeyFrame KeyTime="0:0:0.001">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.21">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.22">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.47">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]lay|LayLoading[IsActive=true]  /template/ TemplatedControl#PART_LoadingContent /template/ Ellipse#PART_Ellipse4">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.501"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:4.4">
+                <KeyFrame KeyTime="0:0:0.001">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.21">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.22">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.47">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]lay|LayLoading[IsActive=true]  /template/ TemplatedControl#PART_LoadingContent /template/ Ellipse#PART_Ellipse5">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.668"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:4.4">
+                <KeyFrame KeyTime="0:0:0.001">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.21">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.22">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.47">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]lay|LayLoading[IsActive=true]  /template/ TemplatedControl#PART_LoadingContent /template/ Ellipse#PART_Ellipse6">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.835"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:4.4">
+                <KeyFrame KeyTime="0:0:0.001">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.21">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.22">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.47">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]lay|LayLoading[IsActive=true]  /template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_Ellipse1R">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.0"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:4.4">
+                <KeyFrame KeySpline="0.13,0.21,0.1,0.7" KeyTime="0:0:0.001">
+                    <Setter Property="RotateTransform.Angle" Value="-110" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0.02,0.33,0.38,0.77" KeyTime="0:0:0.433">
+                    <Setter Property="RotateTransform.Angle" Value="10" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:1.2">
+                    <Setter Property="RotateTransform.Angle" Value="93" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0.57,0.17,0.95,0.75" KeyTime="0:0:1.617">
+                    <Setter Property="RotateTransform.Angle" Value="205" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0,0.19,0.07,0.72" KeyTime="0:0:2.017">
+                    <Setter Property="RotateTransform.Angle" Value="357" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:2.783">
+                    <Setter Property="RotateTransform.Angle" Value="439" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0,0,0.95,0.37" KeyTime="0:0:3.217">
+                    <Setter Property="RotateTransform.Angle" Value="585" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.47">
+                    <Setter Property="RotateTransform.Angle" Value="610" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]lay|LayLoading[IsActive=true]  /template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_Ellipse2R">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.167"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:4.4">
+                <KeyFrame KeySpline="0.13,0.21,0.1,0.7" KeyTime="0:0:0.001">
+                    <Setter Property="RotateTransform.Angle" Value="-116" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0.02,0.33,0.38,0.77" KeyTime="0:0:0.433">
+                    <Setter Property="RotateTransform.Angle" Value="4" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:1.2">
+                    <Setter Property="RotateTransform.Angle" Value="87" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0.57,0.17,0.95,0.75" KeyTime="0:0:1.617">
+                    <Setter Property="RotateTransform.Angle" Value="199" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0,0.19,0.07,0.72" KeyTime="0:0:2.017">
+                    <Setter Property="RotateTransform.Angle" Value="351" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:2.783">
+                    <Setter Property="RotateTransform.Angle" Value="433" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0,0,0.95,0.37" KeyTime="0:0:3.217">
+                    <Setter Property="RotateTransform.Angle" Value="579" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.47">
+                    <Setter Property="RotateTransform.Angle" Value="604" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]lay|LayLoading[IsActive=true]  /template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_Ellipse3R">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.334"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:4.4">
+                <KeyFrame KeySpline="0.13,0.21,0.1,0.7" KeyTime="0:0:0.001">
+                    <Setter Property="RotateTransform.Angle" Value="-122" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0.02,0.33,0.38,0.77" KeyTime="0:0:0.433">
+                    <Setter Property="RotateTransform.Angle" Value="-2" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:1.2">
+                    <Setter Property="RotateTransform.Angle" Value="81" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0.57,0.17,0.95,0.75" KeyTime="0:0:1.617">
+                    <Setter Property="RotateTransform.Angle" Value="193" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0,0.19,0.07,0.72" KeyTime="0:0:2.017">
+                    <Setter Property="RotateTransform.Angle" Value="345" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:2.783">
+                    <Setter Property="RotateTransform.Angle" Value="427" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0,0,0.95,0.37" KeyTime="0:0:3.217">
+                    <Setter Property="RotateTransform.Angle" Value="567" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.47">
+                    <Setter Property="RotateTransform.Angle" Value="598" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]lay|LayLoading[IsActive=true]  /template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_Ellipse4R">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.501"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:4.4">
+                <KeyFrame KeySpline="0.13,0.21,0.1,0.7" KeyTime="0:0:0.001">
+                    <Setter Property="RotateTransform.Angle" Value="-128" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0.02,0.33,0.38,0.77" KeyTime="0:0:0.433">
+                    <Setter Property="RotateTransform.Angle" Value="-8" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:1.2">
+                    <Setter Property="RotateTransform.Angle" Value="75" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0.57,0.17,0.95,0.75" KeyTime="0:0:1.617">
+                    <Setter Property="RotateTransform.Angle" Value="187" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0,0.19,0.07,0.72" KeyTime="0:0:2.017">
+                    <Setter Property="RotateTransform.Angle" Value="339" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:2.783">
+                    <Setter Property="RotateTransform.Angle" Value="421" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0,0,0.95,0.37" KeyTime="0:0:3.217">
+                    <Setter Property="RotateTransform.Angle" Value="567" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.47">
+                    <Setter Property="RotateTransform.Angle" Value="592" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]lay|LayLoading[IsActive=true]  /template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_Ellipse5R">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.668"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:4.4">
+                <KeyFrame KeySpline="0.13,0.21,0.1,0.7" KeyTime="0:0:0.001">
+                    <Setter Property="RotateTransform.Angle" Value="-134" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0.02,0.33,0.38,0.77" KeyTime="0:0:0.433">
+                    <Setter Property="RotateTransform.Angle" Value="-14" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:1.2">
+                    <Setter Property="RotateTransform.Angle" Value="69" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0.57,0.17,0.95,0.75" KeyTime="0:0:1.617">
+                    <Setter Property="RotateTransform.Angle" Value="181" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0,0.19,0.07,0.72" KeyTime="0:0:2.017">
+                    <Setter Property="RotateTransform.Angle" Value="331" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:2.783">
+                    <Setter Property="RotateTransform.Angle" Value="415" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0,0,0.95,0.37" KeyTime="0:0:3.217">
+                    <Setter Property="RotateTransform.Angle" Value="561" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.47">
+                    <Setter Property="RotateTransform.Angle" Value="586" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Window]lay|LayLoading[IsActive=true]  /template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_Ellipse6R">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.835"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:4.4">
+                <KeyFrame KeySpline="0.13,0.21,0.1,0.7" KeyTime="0:0:0.001">
+                    <Setter Property="RotateTransform.Angle" Value="-140" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0.02,0.33,0.38,0.77" KeyTime="0:0:0.433">
+                    <Setter Property="RotateTransform.Angle" Value="-20" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:1.2">
+                    <Setter Property="RotateTransform.Angle" Value="63" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0.57,0.17,0.95,0.75" KeyTime="0:0:1.617">
+                    <Setter Property="RotateTransform.Angle" Value="175" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0,0.19,0.07,0.72" KeyTime="0:0:2.017">
+                    <Setter Property="RotateTransform.Angle" Value="325" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:2.783">
+                    <Setter Property="RotateTransform.Angle" Value="409" />
+                </KeyFrame>
+                <KeyFrame KeySpline="0,0,0.95,0.37" KeyTime="0:0:3.217">
+                    <Setter Property="RotateTransform.Angle" Value="555" />
+                </KeyFrame>
+                <KeyFrame KeyTime="0:0:3.47">
+                    <Setter Property="RotateTransform.Angle" Value="580" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <!--  Window忙碌效果 End  -->
+    <!--  跳跃效果 Start  -->
+    <Style Selector="lay|LayLoading[Type=Skip]">
+        <Setter Property="Size" Value="50" />
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Skip]/template/ TemplatedControl#PART_LoadingContent">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Viewbox Width="{TemplateBinding Tag}" Height="{TemplateBinding Tag}">
+                        <Grid
+                            Width="150"
+                            Height="150"
+                            ClipToBounds="{TemplateBinding ClipToBounds}">
+                            <Grid
+                                Width="150"
+                                Height="150"
+                                ClipToBounds="{TemplateBinding ClipToBounds}">
+                                <Grid
+                                    Name="PART_GridRotate"
+                                    Width="100"
+                                    Height="100">
+                                    <Border
+                                        Name="PART_BorderRotate"
+                                        Background="{TemplateBinding Background}"
+                                        ClipToBounds="{TemplateBinding ClipToBounds}"
+                                        CornerRadius="{TemplateBinding CornerRadius}">
+                                        <Border.Styles>
+                                            <Style Selector="Border#PART_BorderRotate">
+                                                <Setter Property="RenderTransform" Value="rotate(45deg)" />
+                                            </Style>
+                                        </Border.Styles>
+                                    </Border>
+                                </Grid>
+                                <Ellipse
+                                    Name="PART_EllipseRotate"
+                                    Width="100"
+                                    Height="5"
+                                    VerticalAlignment="Bottom"
+                                    Fill="{TemplateBinding Background}"
+                                    Opacity="0.5" />
+                            </Grid>
+                        </Grid>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Skip]lay|LayLoading[IsActive=true]/template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_GridRotate">
+        <Style.Animations>
+            <Animation
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:0.7">
+                <KeyFrame Cue="0%">
+                    <Setter Property="TranslateTransform.Y" Value="0" />
+                    <Setter Property="RotateTransform.Angle" Value="0" />
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="TranslateTransform.Y" Value="50" />
+                    <Setter Property="RotateTransform.Angle" Value="90" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="TranslateTransform.Y" Value="0" />
+                    <Setter Property="RotateTransform.Angle" Value="180" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Skip]lay|LayLoading[IsActive=true]/template/ TemplatedControl#PART_LoadingContent /template/ Ellipse#PART_EllipseRotate">
+        <Style.Animations>
+            <Animation
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:0.7">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Width" Value="100" />
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="Width" Value="150" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Width" Value="100" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <!--  跳跃效果 End  -->
+    <!--  简约 Start  -->
+    <Style Selector="lay|LayLoading[Type=Simple]">
+        <Setter Property="Size" Value="50" />
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Simple]/template/ TemplatedControl#PART_LoadingContent">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Viewbox Width="{TemplateBinding Tag}" Height="{TemplateBinding Tag}">
+                        <Grid Width="150" Height="150">
+                            <UniformGrid
+                                Width="100"
+                                Height="50"
+                                Columns="5">
+                                <Grid
+                                    Name="PART_Grid1"
+                                    Margin="1,0"
+                                    Background="{TemplateBinding Background}" />
+                                <Grid
+                                    Name="PART_Grid2"
+                                    Margin="1,0"
+                                    Background="{TemplateBinding Background}" />
+                                <Grid
+                                    Name="PART_Grid3"
+                                    Margin="1,0"
+                                    Background="{TemplateBinding Background}" />
+                                <Grid
+                                    Name="PART_Grid4"
+                                    Margin="1,0"
+                                    Background="{TemplateBinding Background}" />
+                                <Grid
+                                    Name="PART_Grid5"
+                                    Margin="1,0"
+                                    Background="{TemplateBinding Background}" />
+                            </UniformGrid>
+                        </Grid>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Simple]/template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_Grid1">
+        <Style.Animations>
+            <Animation
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:0.5">
+                <KeyFrame Cue="0%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="2" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Simple]/template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_Grid2">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.1"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:0.5">
+                <KeyFrame Cue="0%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="2" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Simple]/template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_Grid3">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.2"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:0.5">
+                <KeyFrame Cue="0%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="2" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Simple]/template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_Grid4">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.3"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:0.5">
+                <KeyFrame Cue="0%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="2" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Simple]/template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_Grid5">
+        <Style.Animations>
+            <Animation
+                Delay="0:0:0.4"
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:0.5">
+                <KeyFrame Cue="0%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="2" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <!--  简约 End  -->
+    <!--  旋转 Start  -->
+    <Style Selector="lay|LayLoading[Type=Revolve]">
+        <Setter Property="Size" Value="50" />
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Revolve]/template/ TemplatedControl#PART_LoadingContent">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Viewbox Width="{TemplateBinding Tag}" Height="{TemplateBinding Tag}">
+                        <Grid>
+                            <Grid
+                                Name="PART_Grid"
+                                Width="40"
+                                Height="40"
+                                Margin="5">
+                                <Path
+                                    Margin="5"
+                                    Data="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946 s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634       c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"
+                                    Fill="{TemplateBinding Background}"
+                                    Opacity="0.2"
+                                    Stretch="Fill" />
+                                <Path
+                                    x:Name="path"
+                                    Data="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0 C22.32,8.481,24.301,9.057,26.013,10.047z"
+                                    Fill="{TemplateBinding Background}"
+                                    Stretch="None" />
+                            </Grid>
+                        </Grid>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style Selector="lay|LayLoading[Type=Revolve]/template/ TemplatedControl#PART_LoadingContent /template/ Grid#PART_Grid">
+        <Style.Animations>
+            <Animation
+                FillMode="None"
+                IterationCount="Infinite"
+                Duration="0:0:1">
+                <KeyFrame Cue="0%">
+                    <Setter Property="RotateTransform.Angle" Value="0" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="RotateTransform.Angle" Value="360" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    <!--  简约 End  -->
+</Styles>

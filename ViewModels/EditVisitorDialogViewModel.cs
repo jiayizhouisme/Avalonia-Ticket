@@ -21,6 +21,7 @@ namespace GetStartedApp.ViewModels
         private UserInfos _visitor;
         private readonly IRegionManager _regionManager;
         private readonly ILayDialogService _layDialogService;
+
         public EditVisitorDialogViewModel(IContainerExtension container)
             : base(container)
         {
@@ -29,7 +30,9 @@ namespace GetStartedApp.ViewModels
             _layDialogService = container.Resolve<ILayDialogService>();
             CancelCommand = new DelegateCommand(CloseDialog);
             ConfirmCommand = new DelegateCommand(SaveVisitor);
+           
         }
+
         public DelegateCommand CancelCommand { get; }
         public DelegateCommand ConfirmCommand { get; }
 
@@ -51,29 +54,21 @@ namespace GetStartedApp.ViewModels
 
         public void OnOpened(ILayDialogParameter parameters)
         {
-            if (parameters.TryGetValue("Visitor", out object visitorObj) && visitorObj is UserInfos visitor)
+            Visitor = parameters.GetValue<UserInfos>("Visitor");
+            
+           if(Visitor==null)
             {
-                Visitor = visitor;
-                System.Diagnostics.Debug.WriteLine($"Received visitor: {visitor.Name}");
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Failed to receive visitor object.");
+                Debug.WriteLine("Failed to receive visitor object.");
                 Visitor = new UserInfos();
             }
-            if (parameters.TryGetValue("OnVisitorUpdated", out object callbackObj) && callbackObj is Action<UserInfos> callback)
-            {
-                _onVisitorUpdatedCallback = callback;
-                System.Diagnostics.Debug.WriteLine("Received OnVisitorUpdated callback.");
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Failed to receive OnVisitorUpdated callback.");
-            }
+            _onVisitorUpdatedCallback = parameters.GetValue<Action<UserInfos>>("OnVisitorUpdated");
+           
+          
         }
         private async void SaveVisitor()
         {
             if (Visitor == null) return;
+
             try
             {
                 var existingVisitor = await _dbContext.UserInfos.FindAsync(Visitor.Id);
@@ -82,26 +77,17 @@ namespace GetStartedApp.ViewModels
                     existingVisitor.Name = Visitor.Name;
                     existingVisitor.PhoneNumber = Visitor.PhoneNumber;
                     existingVisitor.IdCard = Visitor.IdCard;
+
                     await _dbContext.SaveChangesAsync();
-                    var box = MessageBoxManager.GetMessageBoxStandard("修改", "修改成功", ButtonEnum.Ok);
-                    await box.ShowAsync();
-                    _onVisitorUpdatedCallback?.Invoke(Visitor);
+                    _onVisitorUpdatedCallback?.Invoke(existingVisitor);
                     var par = new LayDialogParameter();
-                    par.Add("Visitor", Visitor);
+                    par.Add("Visitor", existingVisitor);
                     RequestClose?.Invoke(new LayDialogResult(LayUI.Avalonia.Enums.ButtonResult.OK, par));
-                    _regionManager.Regions["DialogRegion"].RemoveAll();
-                }
-                else
-                {
-                    var box = MessageBoxManager.GetMessageBoxStandard("错误", "未找到该游客信息，保存失败。", ButtonEnum.Ok);
-                    await box.ShowAsync();
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"保存游客信息失败: {ex.Message}");
-                var box = MessageBoxManager.GetMessageBoxStandard("错误", $"保存游客信息失败: {ex.Message}", ButtonEnum.Ok);
-                await box.ShowAsync();
             }
         }
         public void OnClosed() { }

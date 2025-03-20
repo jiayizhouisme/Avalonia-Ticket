@@ -18,6 +18,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using static GetStartedApp.ViewModels.BookingViewModel;
+using GetStartedApp.Views;
 namespace GetStartedApp.ViewModels
 {
     public class BookingViewModel : ViewModelBase, INavigationAware
@@ -97,15 +98,16 @@ namespace GetStartedApp.ViewModels
                         OnPropertyChanged(nameof(Visitors));
                     }
                     OnPropertyChanged(nameof(RequiredVisitorsCount));
+                    UpdateRequiredVisitorsCountUI();
                 }
             }
         }
+
         public int RequiredVisitorsCount
         {
             get
             {
-                
-                return Math.Max(1, SelectedQuantity);
+                return Math.Max(0, SelectedQuantity - Visitors.Count(v => v.IsDetailsVisible));
             }
         }
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
@@ -139,6 +141,10 @@ namespace GetStartedApp.ViewModels
             DateOptions = new ObservableCollection<DateOption>();
             _regionManager = container.Resolve<IRegionManager>();
             this._layDialogService = layDialog;
+            if (_regionManager == null)
+            {
+                Debug.WriteLine("_regionManager is null in BookingViewModel");
+            }
             InitializeCommands();
         }
         private void InitializeCommands()
@@ -155,19 +161,49 @@ namespace GetStartedApp.ViewModels
             EditVisitorCommand = new DelegateCommand<UserInfos>(EditVisitor);
         }
 
+        //private void EditVisitor(UserInfos visitor)
+        //{
+        //    if (visitor == null)
+        //    {
+        //        Debug.WriteLine("Visitor is null. Cannot open edit dialog.");
+        //        return;
+        //    }
+
+        //    Debug.WriteLine($"Editing visitor: {visitor.Name}, ID: {visitor.Id}");
+
+        //    var parameters = new LayDialogParameter();
+        //    parameters.Add("Visitor", visitor);
+        //    parameters.Add("OnVisitorUpdated", new Action<UserInfos>(UpdateVisitorInfo));
+
+        //    this._layDialogService.Show("EditVisitorDialog", parameters, res =>
+        //    {
+        //        if (res.Result == LayUI.Avalonia.Enums.ButtonResult.OK)
+        //        {
+        //            var updatedVisitor = res.Parameters.GetValue<UserInfos>("Visitor");
+        //            if (updatedVisitor != null)
+        //            {
+        //                UpdateVisitorInfo(updatedVisitor);
+        //            }
+        //            else
+        //            {
+        //                Debug.WriteLine("Updated visitor is null after dialog closed.");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            Debug.WriteLine("Dialog closed without saving.");
+        //        }
+        //    }, "VisitPageDialog");
+        //}
         private void EditVisitor(UserInfos visitor)
         {
-            //if (visitor == null)
-            //{
-            //    System.Diagnostics.Debug.WriteLine("尝试编辑的游客对象为空，取消操作。");
-            //    return;
-            //}
-           
-                var parameters = new LayDialogParameter();
+            if (visitor == null) return;
+
+            var parameters = new LayDialogParameter();
             parameters.Add("Visitor", visitor);
             parameters.Add("OnVisitorUpdated", new Action<UserInfos>(UpdateVisitorInfo));
 
-            this._layDialogService.Show("EditVisitorDialog", parameters, res =>
+            _layDialogService.Show("EditVisitorDialog", parameters, res =>
             {
                 if (res.Result == LayUI.Avalonia.Enums.ButtonResult.OK)
                 {
@@ -179,7 +215,6 @@ namespace GetStartedApp.ViewModels
                 }
             }, "VisitPageDialog");
         }
-
         private void UpdateVisitorInfo(UserInfos updatedVisitor)
         {
             var existingVisitor = Visitors.FirstOrDefault(v => v.Id == updatedVisitor.Id);
@@ -188,10 +223,24 @@ namespace GetStartedApp.ViewModels
                 existingVisitor.Name = updatedVisitor.Name;
                 existingVisitor.PhoneNumber = updatedVisitor.PhoneNumber;
                 existingVisitor.IdCard = updatedVisitor.IdCard;
+                OnPropertyChanged(nameof(Visitors));
                 OnPropertyChanged(nameof(RequiredVisitorsCount));
-                System.Diagnostics.Debug.WriteLine($"游客信息更新成功: {existingVisitor.Name}");
+
+                Debug.WriteLine($"游客信息更新成功: {existingVisitor.Name}");
             }
         }
+        //private void UpdateVisitorInfo(UserInfos updatedVisitor)
+        //{
+        //    var existingVisitor = Visitors.FirstOrDefault(v => v.Id == updatedVisitor.Id);
+        //    if (existingVisitor != null)
+        //    {
+        //        existingVisitor.Name = updatedVisitor.Name;
+        //        existingVisitor.PhoneNumber = updatedVisitor.PhoneNumber;
+        //        existingVisitor.IdCard = updatedVisitor.IdCard;
+        //        OnPropertyChanged(nameof(RequiredVisitorsCount));
+        //        System.Diagnostics.Debug.WriteLine($"游客信息更新成功: {existingVisitor.Name}");
+        //    }
+        //}
         private void AddVisitor(string messageRootName)
         {
             OnPropertyChanged(nameof(RequiredVisitorsCount));
@@ -235,6 +284,7 @@ namespace GetStartedApp.ViewModels
             if (Visitors.Remove(visitor))
             {
                 OnPropertyChanged(nameof(RequiredVisitorsCount));
+                UpdateRequiredVisitorsCountUI();
             }
             if (visitor == null) return;
             try
@@ -248,17 +298,23 @@ namespace GetStartedApp.ViewModels
                 Debug.WriteLine($"删除游客失败: {ex.Message}");
             }
         }
+
+        private void UpdateRequiredVisitorsCountUI()
+        {
+            OnPropertyChanged(nameof(RequiredVisitorsCount));
+        }
         private async void ShowVisitorDetails(UserInfos visitor)
         {
             int selectedCount = Visitors.Count(v => v.IsDetailsVisible);
             if (!visitor.IsDetailsVisible && selectedCount >= SelectedQuantity)
             {
                 await ShowMessageBoxAsync("提示", "参观人数已经超过了票数，请增加票数");
-                
                 return;
             }
             visitor.IsDetailsVisible = !visitor.IsDetailsVisible;
             OnPropertyChanged(nameof(Visitors));
+            OnPropertyChanged(nameof(RequiredVisitorsCount));
+            UpdateRequiredVisitorsCountUI();
         }
 
         private async Task LoadAvailableDatesAsync()
@@ -370,20 +426,34 @@ namespace GetStartedApp.ViewModels
             var parameters = new LayDialogParameter();
             parameters.Add("Title", title);
             parameters.Add("Message", message);
-            parameters.Add("Button1Text", "去支付");
-            parameters.Add("Button2Text", "取消");
+            parameters.Add("ConfirmText", "去支付");
+            parameters.Add("CancelText", "取消");
 
-            _layDialogService.Show("ConfirmationDialog", parameters, result =>
+            Action<bool> closeCallback = (result) =>
             {
-                if (result.Result == LayUI.Avalonia.Enums.ButtonResult.Yes)
+                if (result)
                 {
-                    tcs.SetResult(parameters.GetValue<string>("Button1Text"));
+                    tcs.SetResult("去支付");
                 }
-                else if (result.Result == LayUI.Avalonia.Enums.ButtonResult.No)
+                else
                 {
-                    tcs.SetResult(parameters.GetValue<string>("Button2Text"));
+                    tcs.SetResult("取消");
                 }
-            }, null);
+            };
+
+            parameters.Add("CloseCallback", closeCallback);
+
+            try
+            {
+                await _layDialogService.Show("ConfirmationDialog", parameters, result =>
+                {
+                }, "ConfirmationDialog");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"显示确认对话框时出错: {ex.Message}");
+            }
+
             return await tcs.Task;
         }
         private async void SubmitOrder()
@@ -408,22 +478,19 @@ namespace GetStartedApp.ViewModels
             {
                 using var dbContext = new DatabaseContext();
                 var appointment = await dbContext.Appointment
-                    .Include(a => a.Order)
-                    .FirstOrDefaultAsync(a =>
+                   .Include(a => a.Order)
+                   .FirstOrDefaultAsync(a =>
                         a.ObjectId == _exhibition.id &&
                         a.StartTime.Date == selectedDate &&
                         a.StartTime == startTime &&
                         a.EndTime == endTime);
+
                 if (appointment == null || appointment.amount < SelectedQuantity)
                 {
                     await ShowMessageBoxAsync("预约失败", "余票不足或时间段已过期");
                     return;
                 }
-                if (appointment.Order.Any(o => o.UserId == currentUserId))
-                {
-                    await ShowMessageBoxAsync("预约失败", "您已预约过该时间段");
-                    return;
-                }
+
                 var order = new Order
                 {
                     Trade_No = long.Parse(GenerateTradeNo()),
@@ -437,18 +504,26 @@ namespace GetStartedApp.ViewModels
                     expireDate = DateTime.Now, // 暂时
                     payedTime = DateTime.Now // 暂时
                 };
-                appointment.amount -= SelectedQuantity; 
-                dbContext.Order.Add(order);
-                await dbContext.SaveChangesAsync();
-                var result = await ShowConfirmationDialogAsync("预约成功", $"已预约{SelectedQuantity}位游客，使用时间：{startTime:yyyy-MM-dd HH:mm}");
 
-                if (result == "去支付")
+                appointment.amount -= SelectedQuantity;
+                dbContext.Order.Add(order);
+                int affectedRows = await dbContext.SaveChangesAsync();
+                if (affectedRows > 0)
                 {
-                    _regionManager.RequestNavigate("Nav_HomeContent", "PaymentPage");
+                    var result = await ShowConfirmationDialogAsync("预约成功", $"已预约{SelectedQuantity}位游客，使用时间：{startTime:yyyy-MM-dd HH:mm}");
+
+                    if (result == "去支付")
+                    {
+                        _regionManager.RequestNavigate("Nav_HomeContent", "PaymentPage");
+                    }
+                    else if (result == "取消")
+                    {
+                        Debug.WriteLine("用户取消了操作");
+                    }
                 }
-                else if (result == "取消")
+                else
                 {
-                    Debug.WriteLine("用户取消了操作");
+                    await ShowMessageBoxAsync("预约失败", "订单保存失败，请稍后重试");
                 }
             }
             catch (Exception ex)
@@ -475,7 +550,7 @@ namespace GetStartedApp.ViewModels
             parameters.Add("Title", title);
             parameters.Add("Message", message);
             var tcs = new TaskCompletionSource<bool>();
-            _layDialogService.Show("OrderTip", parameters, result =>
+           await _layDialogService.Show("OrderTip", parameters, result =>
             {
                 tcs.SetResult(true);
             }, null);

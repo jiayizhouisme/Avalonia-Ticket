@@ -16,11 +16,9 @@
 		<converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 		<converters:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
 	</UserControl.Resources>
-
-	<ScrollViewer VerticalScrollBarVisibility="Auto">
-		<DockPanel LastChildFill="True">
-			<ProgressBar IsIndeterminate="True" Height="4" Margin="10" IsVisible="{Binding IsLoading}" DockPanel.Dock="Top"/>
-			<Grid Margin="20,20,20,20" Width="450" Background="Transparent" HorizontalAlignment="Center" DockPanel.Dock="Top">
+	<Grid>
+		<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,60">
+			<Grid Margin="20,20,20,20" Width="450" Background="Transparent" HorizontalAlignment="Center">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
@@ -55,7 +53,8 @@
 									</Button.Styles>
 									<Button.Template>
 										<ControlTemplate>
-											<Border Background="{Binding IsSelected, Converter={StaticResource BoolToBrushConverter}}" CornerRadius="5" Padding="10" BorderBrush="Gray" BorderThickness="1" Width="80" Height="40" Cursor="Hand">
+											<Border Background="{Binding IsSelected, Converter={StaticResource BoolToBrushConverter}}" CornerRadius="5" Padding="10" BorderBrush="Gray" BorderThickness="1" Width="80" Height="40" Cursor="Hand"
+                                                    PointerPressed="Border_PointerPressed" PointerMoved="Border_PointerMoved" PointerCaptureLost="Border_PointerCaptureLost">
 												<Grid Background="Transparent">
 													<TextBlock Text="{Binding Date, StringFormat='{}{0:MM/dd}'}" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 													<Image Source="avares://GetStartedApp/Assets/downTip.png" MaxHeight="15" MaxWidth="15" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-10" IsVisible="{Binding IsSelected}"/>
@@ -204,8 +203,16 @@
 					</Border>
 				</StackPanel>
 			</Grid>
-			<Button Content="提交订单" Command="{Binding SubmitOrderCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" Width="80" Height="30" CornerRadius="10" Background="#FFDAB9" Foreground="Black" DockPanel.Dock="Bottom"/>
-			<ContentControl prism:RegionManager.RegionName="DialogRegion" />
-		</DockPanel>
-	</ScrollViewer>
+		</ScrollViewer>
+		<Border Background="Transparent" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0" Padding="0" BorderBrush="Gray" BorderThickness="0,1,0,0">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,10,20,10">
+				<Button Content="提交订单" Command="{Binding SubmitOrderCommand}" HorizontalAlignment="Right"
+                        VerticalAlignment="Center" Margin="0,0,0,0" Width="80" Height="30" CornerRadius="10"
+                        Background="#FFDAB9" Foreground="Black"/>
+			</StackPanel>
+		</Border>
+		<lay:LayDialogHost global:LayDialog.Token="ConfirmationDialog">
+		</lay:LayDialogHost>
+		<ContentControl prism:RegionManager.RegionName="DialogRegion" />
+	</Grid>
 </UserControl>

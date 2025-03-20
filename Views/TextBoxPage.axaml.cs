@@ -1,8 +1,10 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using GetStartedApp.ViewModels;
+using Prism.Regions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,11 +14,16 @@ namespace GetStartedApp.Views
     public partial class TextBoxPage : UserControl
     {
         private bool _isLoggedIn = false;
+        private readonly IRegionManager _regionManager;
 
-        public TextBoxPage()
+        public TextBoxPage(IRegionManager regionManager)
         {
             InitializeComponent();
-          
+            _regionManager = regionManager;
+        }
+        private void OnAllButtonClick(object sender, RoutedEventArgs e)
+        {
+            _regionManager.RequestNavigate("Nav_HomeContent", "PaymentPage");
         }
 
         private void OnLoginButtonClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
