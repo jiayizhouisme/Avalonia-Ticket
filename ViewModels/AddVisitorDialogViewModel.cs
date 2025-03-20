@@ -15,7 +15,6 @@ using Avalonia.Controls;
 using System.Threading.Tasks;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
-using Xamarin.Forms;
 
 namespace GetStartedApp.ViewModels
 {

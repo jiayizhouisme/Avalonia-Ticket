@@ -114,7 +114,7 @@
                                 <ItemsControl
                                     Background="Transparent"
                                     BorderThickness="0"
-                                    ItemsSource="{TemplateBinding Items}">
+                                    ItemsSource="{Binding Items}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Margin="5" Orientation="Horizontal" />

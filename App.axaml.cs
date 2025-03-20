@@ -12,7 +12,6 @@ using Prism.Ioc;
 using Prism.Regions;
 using DryIoc;
 using GetStartedApp.Services;
-using Xamarin.Forms;
 using LayUI.Avalonia.Global;
 using LayUI.Avalonia.Interfaces;
 using LayUI.Avalonia;

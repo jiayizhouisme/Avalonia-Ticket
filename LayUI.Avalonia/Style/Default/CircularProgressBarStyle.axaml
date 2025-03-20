@@ -36,7 +36,6 @@
                             StrokeThickness="{TemplateBinding LineThickness}"
                             SweepAngle="360" />
                         <Arc
-                            x:Name="PART_Arc"
                             Margin="{TemplateBinding Padding}"
                             StartAngle="270"
                             Stretch="None"

@@ -34,7 +34,7 @@ namespace GetStartedApp.ViewModels
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Appointment>()
             .HasOne(a => a.Exhibition)
-            .WithMany(e => e.Appointment)
+            .WithMany()
             .HasForeignKey(a => a.objectId);
             //modelBuilder.Entity<Order>()
             //     .ToTable("Order")
